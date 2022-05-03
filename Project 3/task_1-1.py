@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
-from scapy.all import *
+import scapy.all as scapy
 
 INTERFACE_NAME = 'br-22184f2413c5'
 
@@ -24,4 +24,4 @@ def print_pkt(pkt):
     pkt.show()
 
 
-pkt = sniff(iface=INTERFACE_NAME, filter=filter_option, prn=print_pkt)
+pkt = scapy.sniff(iface=INTERFACE_NAME, filter=filter_option, prn=print_pkt)
