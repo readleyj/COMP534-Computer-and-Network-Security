@@ -511,11 +511,24 @@ int main(int argc, char **argv)
     char errbuf[PCAP_ERRBUF_SIZE]; /* error buffer */
     pcap_t *handle;                /* packet capture handle */
 
-    char filter_exp[] = "tcp dst port 23"; /* filter expression [3] */
-    struct bpf_program fp;                 /* compiled filter program (expression) */
-    bpf_u_int32 mask;                      /* subnet mask */
-    bpf_u_int32 net;                       /* ip */
-    int num_packets = 1000;                /* number of packets to capture */
+    /* filter expression [3] */
+
+    // Filter ICMP
+    char filter_exp[] = "icmp";
+
+    // Filter ICMP between specific hosts
+    // char filter_exp[] = "icmp and host 10.9.0.6 and host 10.9.0.5";
+
+    // Filter TCP in range
+    // char filter_exp[] = "tcp and dst host portrange 10-100";
+
+    // Filter telnet
+    // char filter_exp[] = "tcp dst port 23";
+
+    struct bpf_program fp;  /* compiled filter program (expression) */
+    bpf_u_int32 mask;       /* subnet mask */
+    bpf_u_int32 net;        /* ip */
+    int num_packets = 1000; /* number of packets to capture */
 
     print_app_banner();
 
