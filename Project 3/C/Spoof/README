@@ -1,0 +1,5 @@
+
+gcc -o icmp_spoof spoof_icmp.c spoof.c checksum.c
+gcc -o udp_spoof spoof_udp.c spoof.c checksum.c
+gcc -o sniff_spoof_icmp sniff_spoof_icmp.c spoof.c checksum.c
+
