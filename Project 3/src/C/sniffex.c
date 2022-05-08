@@ -520,7 +520,7 @@ int main(int argc, char **argv)
     // char filter_exp[] = "icmp and host 10.9.0.6 and host 10.9.0.5";
 
     // Filter TCP in range
-    // char filter_exp[] = "tcp and dst host portrange 10-100";
+    // char filter_exp[] = "tcp dst portrange 10-100";
 
     // Filter telnet
     // char filter_exp[] = "tcp dst port 23";
